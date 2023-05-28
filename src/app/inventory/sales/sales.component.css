@@ -1,0 +1,69 @@
+.bill-container{
+    margin: 50px;
+    height: 80vh;
+}
+
+.search-field{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    align-items: center;
+}
+
+mat-form-field{
+    width: 250px;
+}
+
+button{
+    padding: 25px;
+    margin-bottom: 15px;
+}
+
+.wrapper{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.table-container{
+    max-height: 60vh;
+    overflow: auto;
+}
+
+
+table,th,td{
+    border: 1px solid grey;
+}
+
+.mdc-data-table__header-cell {
+    color: white;
+    background-color: darkblue !important;
+}
+
+tr:nth-child(even) {
+    background-color: #efefef;
+  }
+
+mat-spinner{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+
+mat-paginator{
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+.image-holder{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.action-center{
+    width: 160px;
+}

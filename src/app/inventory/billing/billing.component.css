@@ -1,0 +1,64 @@
+mat-spinner{
+    margin: auto;
+}
+
+.main-div{
+    margin-top:5vh ;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.wrapper{
+    max-height: 60vh;
+    overflow: auto;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+table{
+    width: 800px;
+}
+
+button{
+    height: 50px;
+}
+
+
+.table-input{
+    width: 100px;
+    margin: 0;
+    padding: 0px;
+}
+
+.name-class{
+    width: 100%;
+}
+
+
+input::placeholder {
+    font-size: 12px; /* adjust the font size to your liking */
+}
+
+mat-card{
+    margin-top:5vh ;
+    position: sticky;
+    bottom: 0;
+}
+
+mat-card-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group{
+    width: 12%;
+    display: flex;
+    justify-content: space-between;
+}
+
+

@@ -1,0 +1,63 @@
+mat-spinner{
+    margin: auto;
+}
+
+.main-div{
+    margin-top:5vh ;
+    width: 80vw;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+table{
+    width: 100%;
+}
+
+thead{
+    background-color: gray;
+}
+
+th{
+    padding: 10px;
+    color: white;
+}
+td input{
+    width: 80px;
+}
+button{
+    height: 50px;
+}
+
+
+.table-input{
+    width: 80px;
+    margin: 0;
+}
+
+
+
+input::placeholder {
+    font-size: 12px; /* adjust the font size to your liking */
+}
+
+mat-card{
+    margin-top:5vh ;
+}
+
+mat-card-content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group{
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+
+

@@ -1,0 +1,77 @@
+<div class="container-fluid bill-container">
+    <p><b>Bill No: {{billNo}}</b></p>
+    <div class="header">
+        <h1><strong><i>{{shopName | uppercase}}</i></strong></h1>
+        <p>{{address}}</p>
+    </div>
+    <div class="name-section">
+        <div>
+            <p><b>Patient's Name:</b></p>
+            <p class="stretch">Soham</p>
+        </div>
+        <div>
+            <p><b>Doctors' Name:</b></p>
+            <p class="stretch">Rohan</p>
+        </div>
+    </div>
+    <div class="table-container" *ngIf="displayList.length>0">
+        <table>
+            <thead>
+              <tr>
+                <th>SR</th>
+                <th>MEDICINE NAME</th>
+                <th class="center-align">BATCH</th>
+                <th class="center-align">EXPIRY</th>
+                <th class="center-align">MRP</th>
+                <th class="center-align">QTY</th>
+                <th class="center-align">AMOUNT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of displayList,let i=index">
+                <td>{{ i+1}}</td>
+                <td>{{ item.name }}</td>
+                <td class="center-align">{{ item.batch }}</td>
+                <td class="center-align">{{ item.expiry }}</td>
+                <td class="center-align">{{ item.mrp }}</td>
+                <td class="center-align">{{ item.qty }}</td>
+                <td class="center-align">{{ item.net }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <div class="footer-section">
+        <div class="left-footer">
+            <div class="bottom-left-footer">
+                <p><b>Date:</b><span>{{ billDate | date: 'dd/MM/yyyy' }}</span></p>
+                <p style="font-size: 10px;">*Goods once sold can not be Returned</p>
+            </div>
+            <div class="bottom-center-footer">
+                <p>Sunday Closed</p>
+            </div>
+            <div class="bottom-right-footer">
+                <p>..................................</p>
+                <p>Signature</p>
+            </div>
+        </div>
+        <div class="right-footer">
+            <div class="sub-total">
+                <p>Sub Total</p>
+                <p>{{subTotal}}</p>
+            </div>
+            <div class="discount">
+                <p>Discount</p>
+                <p>{{discount}}</p>
+            </div>
+            <hr>
+            <div class="total">
+                <p><b>Grand Total</b></p>
+                <p><b>{{finalAmount}}</b></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container button-container">
+    <button mat-raised-button color="primary" (click)="print()" class="no-print">Print</button>
+</div>
+

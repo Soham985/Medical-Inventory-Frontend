@@ -1,0 +1,198 @@
+<div class="container-fluid main-div">
+  <mat-spinner *ngIf="isSaving"></mat-spinner>
+
+  <div class="header" *ngIf="!isSaving">
+    <mat-form-field appearance="outline">
+      <mat-label>Distributor Name*</mat-label>
+      <input matInput type="text" [(ngModel)]="distributor" >
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Invoice No*</mat-label>
+      <input matInput type="text" [(ngModel)]="billNo">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Purchase Date*</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="purchaseDate" [matDatepickerFilter]="myFilter">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Discount*</mat-label>
+      <input matInput type="number" [(ngModel)]="discount" min="0">
+      <mat-error *ngIf="discount<0">Negative value not allowed</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [style.height]="'50px'" (click)="addRow()">Add Medicine</button>
+  </div>
+
+  <!--<table mat-table [dataSource]="medicine" class="mat-elevation-z8" *ngIf="!isSaving">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Medicine Name</th>
+      <td mat-cell *matCellDef="let product">
+        <input matInput [(ngModel)]="product.name">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="batch">
+      <th mat-header-cell *matHeaderCellDef>Batch</th>
+      <td mat-cell *matCellDef="let product">
+          <input matInput [(ngModel)]="product.batch">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expiry">
+      <th mat-header-cell *matHeaderCellDef>Expiry</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput [(ngModel)]="product.expiry" placeholder="MM/YY">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mrp">
+      <th mat-header-cell *matHeaderCellDef>MRP</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.mrp" (blur)="calculateCost(product)">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="rate">
+      <th mat-header-cell *matHeaderCellDef>Rate</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.rate">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qty">
+      <th mat-header-cell *matHeaderCellDef>QTY</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.qty" (blur)="calculateCost(product)">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pck">
+      <th mat-header-cell *matHeaderCellDef>PCK</th>
+      <td mat-cell *matCellDef="let product" style="display: flex;justify-content: center;align-items: center;">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.pck" (blur)="calculateCost(product)">
+          
+        </mat-form-field>
+       <mat-form-field style="width:20px;padding: 0px;">
+        <mat-select style="width:40px;padding: 0px;margin: 0px;">
+            <mat-option *ngFor="let opt of packOptions" [value]="product.pck">
+              {{opt}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cgst">
+      <th mat-header-cell *matHeaderCellDef>CGST</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input class="table-input" matInput type="number" [(ngModel)]="product.cgst">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sgst">
+      <th mat-header-cell *matHeaderCellDef>SGST</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.sgst">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cd">
+      <th mat-header-cell *matHeaderCellDef>CD</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.cd">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="net">
+      <th mat-header-cell *matHeaderCellDef>Net</th>
+      <td mat-cell *matCellDef="let product">
+        <mat-form-field class="table-input">
+          <input matInput type="number" [(ngModel)]="product.net">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="warn" (click)="deleteRow(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['name','batch','expiry','mrp','rate','qty','pck','cgst','sgst','cd','net','actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name','batch','expiry','mrp','rate','qty','pck','cgst','sgst','cd','net','actions'];"></tr>
+  </table>
+  -->
+  <table #myTable class="mat-elevation-z8" *ngIf="!isSaving">
+    <thead>
+      <th>Medicine Name</th>
+      <th>BATCH</th>
+      <th>EXPIRY</th>
+      <th>MRP</th>
+      <th>RATE</th>
+      <th>QTY</th>
+      <th>PCK</th>
+      <th>CGST</th>
+      <th>SGST</th>
+      <th>DISC</th>
+      <th>NET</th>
+      <th>ACTIONS</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let med of medicine">
+        <td><input matInput type="text" [(ngModel)]="med.name" style="width:100%;"></td>
+        <td><input matInput type="text" [(ngModel)]="med.batch"></td>
+        <td><input matInput type="text" [(ngModel)]="med.expiry" placeholder="MM/YY"></td>
+        <td><input matInput type="number" [(ngModel)]="med.mrp" min="0"></td>
+        <td><input matInput type="number" [(ngModel)]="med.rate" min="0" (blur)="calculateCost(med)"></td>
+        <td><input matInput type="number" [(ngModel)]="med.qty" min="0" (blur)="calculateCost(med)"></td>
+        <td>
+          <input matInput type="number" [(ngModel)]="med.pckVal" min="0">
+          <mat-select style="width:40px;padding: 0px;margin: 0px;" [(value)]="med.pck">
+            <mat-option *ngFor="let opt of packOptions" [value]="opt">
+              {{opt}}
+            </mat-option>
+          </mat-select>
+        </td>
+        <td><input matInput type="number" [(ngModel)]="med.cgst"  min="0"></td>
+        <td><input matInput type="number" [(ngModel)]="med.sgst"  min="0"></td>
+        <td><input matInput type="number" [(ngModel)]="med.disc" min="0"></td>
+        <td><input matInput type="number" [(ngModel)]="med.net" [disabled]="true" min="0"></td>
+        <td>
+          <button mat-icon-button color="warn" (click)="deleteRow(med)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <mat-card *ngIf="!isSaving">
+    <mat-card-content>
+      <h2>Gross Total: ₹{{total}}</h2>
+      <div class="button-group">
+        <button mat-raised-button color="primary" (click)="saveStock()">DONE</button>
+        <button mat-raised-button color="primary" (click)="addStock()" [disabled]="error">ADD</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+

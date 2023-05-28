@@ -1,0 +1,86 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="bill-container">
+    <div class="wrapper">
+        <div class="search-field">
+            <mat-form-field appearance="outline">
+                <mat-label>Search BillNo</mat-label>
+                <input matInput [(ngModel)]="billNo">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Search Patient</mat-label>
+                <input matInput [(ngModel)]="patientName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate placeholder="Start date" [(ngModel)]="startDate">
+                  <input matEndDate placeholder="End date" [(ngModel)]="endDate">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+            <button mat-raised-button color="primary" (click)="searchBills()">Search</button>
+        </div>
+        <div class="table-container">
+            <table mat-table matSort [dataSource]="displayList" *ngIf="salesBillList.length>0 && !isLoading;else noItem" class="mat-elevation-z8">
+                <ng-container matColumnDef="billNo">
+                    <th mat-header-cell *matHeaderCellDef>Invoice No</th>
+                    <td mat-cell *matCellDef="let row">
+                    {{row.billNo}}
+                    </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="patient">
+                    <th mat-header-cell *matHeaderCellDef>Patient Name</th>
+                    <td mat-cell *matCellDef="let row">
+                    {{row.patient}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="doctor">
+                    <th mat-header-cell *matHeaderCellDef>Doctor Name</th>
+                    <td mat-cell *matCellDef="let row">
+                    {{row.doctor}}
+                    </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef>Date</th>
+                    <td mat-cell *matCellDef="let row">
+                    {{row.date | date:'mediumDate'}}
+                    </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef>Amount</th>
+                    <td mat-cell *matCellDef="let row">
+                    {{row.total}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef="let row" class="action-center">
+                        <button mat-icon-button color="warn" (click)="deleteRow(row)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="openBill(row._id)">
+                            <mat-icon>description</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+            
+            
+                <tr mat-header-row *matHeaderRowDef="displayColumns;sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"></mat-paginator>
+              
+        </div>
+    </div>
+    <ng-template #noItem>
+        <div class="container-fluid image-holder">
+            <img src="../../../assets/noItem.jpeg" alt="NoItem">
+        </div>
+    </ng-template>
+</div>

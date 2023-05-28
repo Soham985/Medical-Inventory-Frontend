@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <span>{{appHeader}}</span>
+    <span class="spacer"></span>
+    <button mat-button routerLink="/inventory/stocks">Stocks</button>
+    <button mat-button routerLink="/inventory/add-stock">Add Stock</button>
+    <button mat-button routerLink="/inventory/billing">Billing</button>
+    <button mat-button routerLink="/inventory/purchase">Purchase</button>
+    <button mat-button routerLink="/inventory/sales">Sales</button>
+    <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>
+

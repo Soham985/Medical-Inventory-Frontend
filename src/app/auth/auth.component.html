@@ -1,0 +1,35 @@
+<div class="row align-items-center justify-content-center">
+    <div class="col-lg-6 col-xs-12">
+        <img class="img-fluid" src="../../../assets/login.png">
+    </div>
+    <div class="col-lg-6 col-xs-12">
+        <mat-card>
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+            <form (submit)="onSubmit(loginForm)" #loginForm="ngForm" >
+                <h1 class="heading">Please {{currentState}}</h1>
+                <mat-form-field [style.background-color]="'white'">
+                    <input matInput type="email" name="email" ngModel #emailInput="ngModel" required email placeholder="Enter Email">
+                    <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput type="password" name="password" ngModel #password="ngModel" required placeholder="Enter Password">
+                    <mat-error *ngIf="password.invalid">Please enter a valid password</mat-error>
+                </mat-form-field>
+                <mat-form-field *ngIf="currentState=='Signup'">
+                    <input matInput type="text" name="shopName" ngModel #shopName="ngModel" required placeholder="Enter Shop Name">
+                    <mat-error *ngIf="shopName.invalid">Please enter shop name</mat-error>
+                </mat-form-field>
+                <mat-form-field *ngIf="currentState=='Signup'">
+                    <textarea matInput name="address" ngModel #address="ngModel" required placeholder="Enter Address"></textarea>
+                    <mat-error *ngIf="password.invalid">Please enter address</mat-error>
+                </mat-form-field>
+                <button  mat-raised-button color="primary" type="submit">{{currentState}}</button>
+                <p (click)="changeAuth()">Want to {{currentState=='Login'? 'Signup':'Login'}} instead?</p>
+                <p *ngIf="registerError" class="text-danger">Signup Failed</p>
+                <p *ngIf="loginError" class="text-danger">Login Failed</p>
+            </form>
+        </mat-card>
+    </div>
+  <div>
+  
+

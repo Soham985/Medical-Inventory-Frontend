@@ -1,0 +1,44 @@
+.row{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+mat-card{
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+mat-form-field{
+    width: 80%;
+}
+
+mat-spinner{
+    margin: auto;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: white;
+}
+
+.heading{
+    color: navy;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+button{
+    margin-top: 30px;
+    width: 30%;
+}
+
+p{
+    color: blue;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+
